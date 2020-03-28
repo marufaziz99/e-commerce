@@ -206,6 +206,11 @@
         include 'module/merek/tambah_merek.php';
       }
 
+       else if ($_GET['module'] == 'produk') 
+      {
+        include 'module/produk/list_produk.php';
+      } 
+
       else 
       {
         include "module/home/home.php";
