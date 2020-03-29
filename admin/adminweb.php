@@ -211,6 +211,11 @@
         include 'module/produk/list_produk.php';
       } 
 
+      else if ($_GET['module'] == 'tambah_produk') 
+      {
+        include 'module/produk/form_tambah.php';
+      }
+
       else 
       {
         include "module/home/home.php";
