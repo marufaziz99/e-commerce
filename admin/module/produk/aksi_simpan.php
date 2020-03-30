@@ -10,13 +10,12 @@ if(empty($_SESSION['username']) AND empty($_SESSION['passuser']))
 else
 {
 	include "../../../lib/config.php";
-	include "../../../lib/koneksi.php"
+	include "../../../lib/koneksi.php";
+	date_default_timezone_set('Asia/Jakarta');
 
 //ambil data yang di kirim dari form
-	$nama_file = $_FILES['gambar'] ['nama'];
-	$ukuran_file = $_FILES['gambar'] ['size'];
-	$tipe_file = $_FILES['gambar'] ['type'];
-	$tmp_file = $_FILES['gambar'] ['tmp_name'];
+	$lokasifile = $_FILES['gambar']['tmp_name'];
+	$namafile = date("his").$_FILES['gambar']['name'];
 
 //data selain gambar
 	$idKategori = $_POST['idKategori'];
@@ -28,51 +27,29 @@ else
 	$rekomendasi = $_POST['rekomendasi'];
 
 //set path folder lokasi penyimpanan gambar
-	$path = "../../upload/".$nama_file;
+	$uploaddir = "../../upload/";
+	$uploadfile = $uploaddir.$namafile;
 
-	if ($tipe_file == "image/jpeg" || $tipe_file == "image/png")
-	{
-		if ($ukuran_file <= 1000000) 
-		{
-			if (move_uploaded_file($tmp_file, $path)) 
-			{
-				if ($tipe_file == "image/jpeg" || $tipe_file == "image/png")
-				{
-					if ($ukuran_file <= 1000000) 
-					{
-						if (move_uploaded_file($tmp_file, $path)) 
-						{
-							$queriSimpan = mysqli_query($koneksi, "INSERT INTO tbl_produk(id_kategori, id_merek, nama_produkm deskripsi, harga, gambar, slide, rekomendasi)
-								VALUES('$idKategori', '$idMerek','$namaProduk','$deskripsi','$hargaProduk','$nama_file','$slide','$rekomendasi')");
-							if ($querySimpan)
-							{
-								echo "<script> alert['Data Produk berhasil Masuk']; window.location = '$admin_url'+'adminweb.php?module=produk';</script>";
-							}
+	if(move_uploaded_file($lokasifile , $uploadfile)){
+		// echo "Nama File : <b> </b> sukses di upload"; 
 
-							else
-							{
-								echo "<script> alert['Data Produk berhasil Masuk']; window.location = '$admin_url'+'adminweb.php?module=tambah_produk';</script>";
-							}
-						}
+		$sql = mysqli_query($koneksi, "INSERT INTO tbl_produk (id_kategori_produk, id_merek, nama_produk, deskripsi, harga, gambar, slide, rekomendasi) VALUES ($idKategori, $idMerek, '$namaProduk', '$deskripsiProduk', $hargaProduk, '$namafile', '$slide', '$rekomendasi')");
 
-						else
-						{
-							echo "<script> alert['Data Gambar Produk Gagal Dimasukkan']; window.location = '$admin_url'+'adminweb.php?module=tambah_produk';</script>";
-						}
-					}
+		echo "<script> 
+			alert('Data merek Berhasil Masuk'); 
+			window.location = '$admin_url'+'adminweb.php?module=produk';
+		</script>";
 
-					else
-					{
-						echo "<script> alert['Gambar Melebihi Ukuran 1 MB']; window.location = '$admin_url'+'adminweb.php?module=tambah_produk';</script>";
-					}
-				}
-
-				else
-				{
-					echo "<script> alert['Gagal Dimasukkan!! Eksistensi Tidak Sesuai']; window.location = '$admin_url'+'adminweb.php?module=tambah_produk';</script>";
-				}
-			}
-		}
+		// echo "berhasil";
 	}
+	else{
+		echo "<script> 
+			alert('Data merek Gagal Dimasukkan'); 
+			window.location= '$admin_url'+'adminweb.php?module=tambah_produk';
+		</script>";
+
+		// echo "gagal";
+	}
+
 }
 ?>

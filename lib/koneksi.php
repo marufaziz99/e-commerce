@@ -1,6 +1,6 @@
 <?php
 
-$server = "127.0.0.1:3366";
+$server = "127.0.0.1";
 $username = "root";
 $password = "";
 $database = "project_ecommerce_0849";

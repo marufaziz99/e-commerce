@@ -216,6 +216,11 @@
         include 'module/produk/form_tambah.php';
       }
 
+      else if ($_GET['module'] == 'edit_produk') 
+      {
+        include 'module/produk/edit_produk.php';
+      }
+
       else 
       {
         include "module/home/home.php";

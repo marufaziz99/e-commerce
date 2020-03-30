@@ -16,10 +16,10 @@
 			<form class="form-horizontal" action="../admin/module/produk/aksi_simpan.php" method="post" enctype="multipart/form-data">
 				<div class="box-body">
 					<div class="form-group">
-						<label for="inputEmail3"class="col-sm-2 control-label">Kategori</label>
+						<label for="inputEmail3"class="col-sm-2 control-label">Kategori *</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="idKategori"><
-
+							<select class="form-control" name="idKategori" required>
+								<option value="">-- Pilih Kategori --</option>
 								<?php
 										include "../lib/koneksi.php";
 											$kueriKategori=mysqli_query($koneksi, "select * from tbl_kategori");
@@ -33,10 +33,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3"class="col-sm-2 control-label">Merek</label>
+						<label for="inputEmail3"class="col-sm-2 control-label">Merek *</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="idMerek"><
-
+							<select class="form-control" name="idMerek" required>
+								<option value="">-- Pilih Merek --</option>
 								<?php
 										include "../lib/koneksi.php";
 											$kueriMerek=mysqli_query($koneksi, "select * from tbl_merek");
@@ -51,31 +51,32 @@
 					</div>
 
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Nama Produk</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">Nama Produk *</label>
 						<div class="col-sm-10">
-						<input type="text" class="form-control" id="namaProduk" name="namaProduk" placeholder="Nama Produk">
+						<input type="text" class="form-control" id="namaProduk" name="namaProduk" placeholder="Nama Produk" required>
 					</div>
 					</div>
 
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"> Gambar </label>
+						<label for="inputEmail3" class="col-sm-2 control-label"> Gambar *</label>
 						<div class="col-sm-10">
-							<input type="file" id="gambar" name="gambar">
+							<input type="file" id="gambar" name="gambar" class="form-control" required>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"> Deskripsi Produk
+						<label for="inputEmail3" class="col-sm-2 control-label"> Deskripsi Produk *
 						</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="deskripsiProduk" name="deskripsiProduk" placeholder="Deskripsi Produk">
+							<input type="text" class="form-control" id="deskripsiProduk" name="deskripsiProduk" placeholder="Deskripsi Produk" required>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Harga Produk</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">Harga Produk *
+						</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="hargaProduk" name="hargaProduk" placeholder="Harga Produk">
+							<input type="number" class="form-control" id="hargaProduk" name="hargaProduk" placeholder="Harga Produk" required>
 						</div>
 					</div>
 
@@ -116,7 +117,7 @@
 					</div>
 
 					</div><!-- /.box-body -->
-					<div class="box-footer"> 
+					<div> 
 						<button type="submit" class="btn btn-primary pull-right"> Simpan </button>
 					</div><!-- /.box-footer -->
 				</div>

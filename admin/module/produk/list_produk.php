@@ -15,29 +15,36 @@
 <div class="box-body table-responsive no-padding">
 	<table class="table table-hover">
 		<tr>
+			<th>No</th>
 			<th>Produk</th>
+			<th>Kategori</th>
+			<th>Merek</th>
 			<th>Gambar</th>
 			<th style="width: 110px">Aksi</th>
 		</tr>
 			<?php
+				$no = 1;
 				include "../lib/config.php";
 				include "../lib/koneksi.php";
 
-				$kueriProduk=mysqli_query($koneksi, "select * from tbl_produk");
+				$kueriProduk= mysqli_query($koneksi, "select * from tbl_produk join tbl_kategori on tbl_produk.id_kategori_produk = tbl_kategori.id_kategori join tbl_merek on tbl_produk.id_merek = tbl_merek.id_merek");
 
 				while($pro=mysqli_fetch_array($kueriProduk)) {
 					?>
 
 		<tr>
-			<td><?php echo $pro['nama_produk']; ?> </td>
+			<td><?=$no++?></td>
+			<td><?=$pro['nama_produk']?> </td>
+			<td><?=$pro['nama_kategori']?></td>
+			<td><?=$pro['nama_merek']?></td>
 			<td>
-				<img src="upload/<?php echo $pro['gambar']; ?>" height="100" width="150">
+				<img src="upload/<?=$pro['gambar']?>" height="100" width="150">
 			</td>
 			<td>
 				<div class="btn-group">
 					<a href="<?php echo $admin_url; ?>adminweb.php?module=edit_produk&id_produk=<?php echo $pro['id_produk']; ?>"
 						class="btn btn-warning"> <i class='fa fa-pencil'></i></button></a>
-					<a href="<?php echo $admin_url; ?>module/produk/aksi_hapus.php?id_produk=<?php echo $pro['id_produk']; ?>"
+					<a href="<?php echo $admin_url; ?>module/produk/aksi_hapus.php?id_produk=<?=$pro['id_produk']?>"
 						onClick="return confirm('Anda Yakin ingin Mengahpus Data ini?')" class="btn btn-danger"><i class='fa fa-power-off'></i></button></a>
 				</div>
 			</td>
