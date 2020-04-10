@@ -1,7 +1,7 @@
 <?php
 
 $server = "127.0.0.1"; // setingan di pc
-// $server = "127.0.0.1:3307"; // setingan di laptop
+// $server = "127.0.0.1:3366"; // setingan di laptop
 $username = "root";
 $password = "";
 $database = "project_ecommerce_0849";

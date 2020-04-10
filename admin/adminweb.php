@@ -26,6 +26,7 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="asset/bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Date Picker -->
+  
   <link rel="stylesheet" href="asset/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="asset/bower_components/bootstrap-daterangepicker/daterangepicker.css">
@@ -137,10 +138,26 @@
          <li>
           <a href="adminweb.php?module=produk"> <i class="fa fa-th"></i> <span>Produk</span></a>
         </li>
-         <li>
+          
+        <!-- <li>
           <a href="adminweb.php?module=biaya"> <i class="fa fa-car"></i> <span>Biaya Kirim</span></a>
+        </li> -->
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Biaya Kirim</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="adminweb.php?module=kota"><i class="fa fa-circle-o"></i> Kota</a></li>
+            <li><a href="adminweb.php?module=kurir"><i class="fa fa-circle-o"></i> Kurir</a></li>
+            <li><a href="adminweb.php?module=biaya"><i class="fa fa-circle-o"></i> Biaya Kirim</a></li>
+          </ul>
         </li>
-         <li>
+
+        <li>
           <a href="adminweb.php?module=produk"> <i class="fa fa-money"></i> <span>Pesanan</span></a>
         </li>
          <li>
@@ -219,6 +236,51 @@
       else if ($_GET['module'] == 'edit_produk') 
       {
         include 'module/produk/edit_produk.php';
+      }
+
+      else if ($_GET['module'] == 'kota') 
+      {
+        include 'module/kota/list_kota.php';
+      }
+
+      else if ($_GET['module'] == 'tambah_kota') 
+      {
+        include 'module/kota/tambah_kota.php';
+      }
+
+      else if ($_GET['module'] == 'edit_kota') 
+      {
+        include 'module/kota/ubah_kota.php';
+      }
+
+      else if ($_GET['module'] == 'kurir') 
+      {
+        include 'module/kurir/list_kurir.php';
+      }
+
+      else if ($_GET['module'] == 'tambah_kurir') 
+      {
+        include 'module/kurir/tambah_kurir.php';
+      }
+
+      else if ($_GET['module'] == 'edit_kurir') 
+      {
+        include 'module/kurir/ubah_kurir.php';
+      }
+
+      else if ($_GET['module'] == 'biaya') 
+      {
+        include 'module/biaya/list_biaya.php';
+      } 
+
+      else if ($_GET['module'] == 'tambah_biaya') 
+      {
+        include 'module/biaya/form_tambah.php';
+      }
+
+      else if ($_GET['module'] == 'edit_biaya') 
+      {
+        include 'module/biaya/form_edit.php';
       }
 
       else 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 30, 2020 at 12:12 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Host: 127.0.0.1:3366
+-- Generation Time: Apr 08, 2020 at 06:46 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -50,10 +50,19 @@ INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`, `nama`, `email`) VA
 --
 
 CREATE TABLE `tbl_biaya_kirim` (
-  `id_biaya_kirim` int(10) NOT NULL,
-  `kota` varchar(50) NOT NULL,
-  `biaya` int(10) NOT NULL
+  `id_biaya_kirim` varchar(10) NOT NULL,
+  `biaya` int(50) NOT NULL,
+  `id_kota` varchar(50) NOT NULL,
+  `id_jasa` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_biaya_kirim`
+--
+
+INSERT INTO `tbl_biaya_kirim` (`id_biaya_kirim`, `biaya`, `id_kota`, `id_jasa`) VALUES
+('b1', 7000, 'k1', 'j1'),
+('b2', 10000, 'k3', 'j2');
 
 -- --------------------------------------------------------
 
@@ -91,6 +100,45 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 (5, 'Kebutuhan Sekolah'),
 (6, 'Elektronik'),
 (7, 'Buku');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_kota`
+--
+
+CREATE TABLE `tbl_kota` (
+  `id_kota` varchar(50) NOT NULL,
+  `nama_kota` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_kota`
+--
+
+INSERT INTO `tbl_kota` (`id_kota`, `nama_kota`) VALUES
+('k1', 'Magelang'),
+('K2', 'Purwokerto'),
+('k3', 'Kebumen');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_kurir`
+--
+
+CREATE TABLE `tbl_kurir` (
+  `id_jasa` varchar(11) NOT NULL,
+  `nama_jasa` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_kurir`
+--
+
+INSERT INTO `tbl_kurir` (`id_jasa`, `nama_jasa`) VALUES
+('j1', 'POS'),
+('j2', 'JNE');
 
 -- --------------------------------------------------------
 
@@ -181,7 +229,9 @@ ALTER TABLE `tbl_admin`
 -- Indexes for table `tbl_biaya_kirim`
 --
 ALTER TABLE `tbl_biaya_kirim`
-  ADD PRIMARY KEY (`id_biaya_kirim`);
+  ADD PRIMARY KEY (`id_biaya_kirim`),
+  ADD KEY `id_jasa` (`id_jasa`),
+  ADD KEY `id_kota` (`id_kota`);
 
 --
 -- Indexes for table `tbl_detail_order`
@@ -194,6 +244,18 @@ ALTER TABLE `tbl_detail_order`
 --
 ALTER TABLE `tbl_kategori`
   ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `tbl_kota`
+--
+ALTER TABLE `tbl_kota`
+  ADD PRIMARY KEY (`id_kota`);
+
+--
+-- Indexes for table `tbl_kurir`
+--
+ALTER TABLE `tbl_kurir`
+  ADD PRIMARY KEY (`id_jasa`);
 
 --
 -- Indexes for table `tbl_member`
@@ -232,12 +294,6 @@ ALTER TABLE `tbl_admin`
   MODIFY `id_admin` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `tbl_biaya_kirim`
---
-ALTER TABLE `tbl_biaya_kirim`
-  MODIFY `id_biaya_kirim` int(10) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tbl_detail_order`
 --
 ALTER TABLE `tbl_detail_order`
@@ -271,11 +327,18 @@ ALTER TABLE `tbl_order`
 -- AUTO_INCREMENT for table `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `id_produk` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_produk` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_biaya_kirim`
+--
+ALTER TABLE `tbl_biaya_kirim`
+  ADD CONSTRAINT `tbl_biaya_kirim_ibfk_1` FOREIGN KEY (`id_jasa`) REFERENCES `tbl_kurir` (`id_jasa`),
+  ADD CONSTRAINT `tbl_biaya_kirim_ibfk_2` FOREIGN KEY (`id_kota`) REFERENCES `tbl_kota` (`id_kota`);
 
 --
 -- Constraints for table `tbl_produk`

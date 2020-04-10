@@ -14,6 +14,7 @@
   
 <div class="box-body table-responsive no-padding">
 	<table class="table table-hover">
+		<h3>Data Produk</h3>
 		<tr>
 			<th>No</th>
 			<th>Produk</th>
